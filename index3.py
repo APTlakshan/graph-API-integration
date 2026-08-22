@@ -97,48 +97,6 @@ def analyze_news_with_deepseek(raw_news):
         print(f"DeepSeek API Error: {e}")
     return None, None
 
-def post_promotional_comment_and_pin(post_id):
-    """පෝස්ට් එකට කමෙන්ට් එක දමා එය Pin කිරීම"""
-    comment_text = (
-        "hi we are the Auto PST page team\n"
-        "if you want to make any kind of software project\n"
-        "plz contact us (http://www.autopstpage.com)\n"
-        "call us : +94112233365"
-    )
-    
-    try:
-        # 1. කමෙන්ට් එක පෝස්ට් කිරීමට
-        comment_url = f"https://graph.facebook.com/v18.0/{post_id}/comments"
-        payload = {
-            'message': comment_text,
-            'access_token': PAGE_ACCESS_TOKEN
-        }
-        res = requests.post(comment_url, data=payload, timeout=15)
-        res_data = res.json()
-        
-        if res.status_code == 200 and 'id' in res_data:
-            comment_id = res_data['id']
-            print(f"Comment posted successfully. Comment ID: {comment_id}")
-            
-            # 2. දමූ කමෙන්ට් එක Pin කිරීමට
-            pin_url = f"https://graph.facebook.com/v18.0/{comment_id}"
-            pin_payload = {
-                'is_pinned': 'true',
-                'access_token': PAGE_ACCESS_TOKEN
-            }
-            pin_res = requests.post(pin_url, data=pin_payload, timeout=15)
-            pin_data = pin_res.json()
-            
-            if pin_res.status_code == 200 and pin_data.get('success'):
-                print("Comment pinned successfully!")
-            else:
-                print("Failed to pin comment (Note: Page token needs moderation permission):", pin_data)
-        else:
-            print("Failed to post comment:", res_data)
-            
-    except Exception as e:
-        print(f"Error in posting/pinning comment: {e}")
-
 def publish_automated_post():
     print("1. Fetching unposted live news from RSS...")
     news_title, raw_news = fetch_latest_financial_news()
@@ -158,11 +116,22 @@ def publish_automated_post():
 
     print(f"AI Suggested Search Keyword for Media: '{search_keyword}'")
 
+    # ප්‍රචාරක විස්තරය (Promotional Footer) සකස් කිරීම
+    promotional_footer = (
+        "\n\n-----------------------------------\n"
+        "hi we are the Auto PST page team\n"
+        "if you want to make any kind of software project\n"
+        "plz contact us (http://www.autopstpage.com)\n"
+        "call us : +94112233365"
+    )
+    
+    # AI කන්ටෙන්ට් එක සමඟ ප්‍රචාරක කොටස එකතු කිරීම
+    final_content = content + promotional_footer
+
     chosen_media = random.choices(["photo", "video"], weights=[0.3, 0.7])[0]
     print(f"Selected Media Type: {chosen_media.upper()}")
 
     success = False
-    post_id = None
 
     try:
         if chosen_media == "photo":
@@ -172,13 +141,11 @@ def publish_automated_post():
             if img_resp.status_code == 200:
                 media_url = img_resp.json()['urls']['regular']
                 fb_url = f"https://graph.facebook.com/{PAGE_ID}/photos"
-                fb_payload = {'url': media_url, 'caption': content, 'access_token': PAGE_ACCESS_TOKEN}
+                fb_payload = {'url': media_url, 'caption': final_content, 'access_token': PAGE_ACCESS_TOKEN}
                 res = requests.post(fb_url, data=fb_payload, timeout=20)
                 
                 if res.status_code == 200:
-                    res_json = res.json()
-                    print("Photo Post Result:", res_json)
-                    post_id = res_json.get('post_id') or res_json.get('id')
+                    print("Photo Post Result:", res.json())
                     success = True
                 else:
                     print("Facebook Photo Error:", res.json())
@@ -193,13 +160,11 @@ def publish_automated_post():
                 video_url = selected_video['video_files'][0]['link']
                 
                 fb_url = f"https://graph.facebook.com/{PAGE_ID}/videos"
-                fb_payload = {'file_url': video_url, 'description': content, 'access_token': PAGE_ACCESS_TOKEN}
+                fb_payload = {'file_url': video_url, 'description': final_content, 'access_token': PAGE_ACCESS_TOKEN}
                 res = requests.post(fb_url, data=fb_payload, timeout=30)
                 
                 if res.status_code == 200:
-                    res_json = res.json()
-                    print("Video Post Result:", res_json)
-                    post_id = res_json.get('id')
+                    print("Video Post Result:", res.json())
                     success = True
                 else:
                     print("Facebook Video Error:", res.json())
@@ -209,10 +174,6 @@ def publish_automated_post():
     if success:
         save_posted_news_to_db(news_title)
         print("News marked as posted in Supabase successfully!")
-        
-        if post_id:
-            print("Posting and pinning promotional comment...")
-            post_promotional_comment_and_pin(post_id)
 
 if __name__ == "__main__":
     random_delay = random.randint(0, 40) * 60
