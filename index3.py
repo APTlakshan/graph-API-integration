@@ -3,7 +3,9 @@ import random
 import json
 import feedparser
 import requests
+import time
 from dotenv import load_dotenv
+from supabase import create_client, Client
 
 # .env ෆයිල් එකෙන් රහස් දත්ත ලබා ගැනීම
 load_dotenv()
@@ -14,7 +16,11 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY")
 
-POSTED_NEWS_FILE = "posted_news.txt"
+# Supabase Configurations
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 RSS_FEEDS = [
     "https://www.coindesk.com/arc/outboundfeeds/rss/",
@@ -22,18 +28,25 @@ RSS_FEEDS = [
     "https://finance.yahoo.com/news/rssindex"
 ]
 
-def load_posted_news():
-    if not os.path.exists(POSTED_NEWS_FILE):
+def load_posted_news_from_db():
+    """Supabase ඩේටාබේස් එකෙන් මීට පෙර පෝස්ට් කළ නිව්ස් වල මාතෘකා ලබා ගැනීම"""
+    try:
+        response = supabase.table("posted_news").select("news_title").execute()
+        return set(row["news_title"] for row in response.data)
+    except Exception as e:
+        print(f"Error loading from Supabase: {e}")
         return set()
-    with open(POSTED_NEWS_FILE, "r", encoding="utf-8") as f:
-        return set(line.strip() for line in f)
 
-def save_posted_news(news_title):
-    with open(POSTED_NEWS_FILE, "a", encoding="utf-8") as f:
-        f.write(news_title + "\n")
+def save_posted_news_to_db(news_title):
+    """අලුතින් පෝස්ට් කළ නිව්ස් එක Supabase ඩේටාබේස් එකට ඇතුළත් කිරීම"""
+    try:
+        supabase.table("posted_news").insert({"news_title": news_title}).execute()
+        print("News successfully saved to Supabase database!")
+    except Exception as e:
+        print(f"Error saving to Supabase: {e}")
 
 def fetch_latest_financial_news():
-    posted_news = load_posted_news()
+    posted_news = load_posted_news_from_db()
     shuffled_feeds = RSS_FEEDS.copy()
     random.shuffle(shuffled_feeds)
     
@@ -50,10 +63,6 @@ def fetch_latest_financial_news():
     return None, None
 
 def analyze_news_with_deepseek(raw_news):
-    """
-    DeepSeek AI එක මඟින් නිව්ස් එක ඇනලයිස් කරලා, 
-    ප්‍රොෆෙෂනල් පෝස්ට් එකකුයි, ඩීටේල්ස් වලට ගැලපෙන Image/Video Search Keyword එකකුයි ලබා දෙයි.
-    """
     try:
         deepseek_url = "https://api.deepseek.com/chat/completions"
         headers = {
@@ -107,7 +116,6 @@ def publish_automated_post():
 
     print(f"AI Suggested Search Keyword for Media: '{search_keyword}'")
 
-    # Media Type Selection: 70% Photo, 30% Video
     chosen_media = random.choices(["photo", "video"], weights=[0.3, 0.7])[0]
     print(f"Selected Media Type: {chosen_media.upper()}")
 
@@ -152,8 +160,13 @@ def publish_automated_post():
         print(f"Network or Publishing Exception: {e}")
 
     if success:
-        save_posted_news(news_title)
-        print("News marked as posted successfully!")
+        save_posted_news_to_db(news_title)
+        print("News marked as posted in Supabase successfully!")
 
 if __name__ == "__main__":
+    # ස්වභාවික පෙනුම සඳහා අහඹු ප්‍රමාදයක් (0 සිට 40 විනාඩි අතර)
+    random_delay = random.randint(0, 40) * 60
+    print(f"Waiting for {random_delay // 60} minutes before posting...")
+    time.sleep(random_delay)
+    
     publish_automated_post()
