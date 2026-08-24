@@ -119,10 +119,11 @@ def publish_automated_post():
     # ප්‍රචාරක විස්තරය (Promotional Footer) සකස් කිරීම
     promotional_footer = (
         "\n\n-----------------------------------\n"
-        "hi we are the Auto PST page team\n"
-        "if you want to make any kind of software project\n"
-        "plz contact us (http://www.autopstpage.com)\n"
-        "call us : +94112233365"
+        "hi we are the Swap gate team\n"
+        "if you want  set or buy USDT\n"
+        "there are many features you can experience with our website\n"
+        "plz visit us 🌐 (http://www.swapgate-store.com)\n"
+        "call us 📞  : +94 71 753 3547"
     )
     
     # AI කන්ටෙන්ට් එක සමඟ ප්‍රචාරක කොටස එකතු කිරීම
