@@ -119,11 +119,20 @@ def publish_automated_post():
     # ප්‍රචාරක විස්තරය (Promotional Footer) සකස් කිරීම
     promotional_footer = (
         "\n\n-----------------------------------\n"
-        "hi we are the Swap gate team\n"
-        "if you want  set or buy USDT\n"
-        "there are many features you can experience with our website\n"
-        "plz visit us 🌐 (http://www.swapgate-store.com)\n"
-        "call us 📞  : +94 71 753 3547"
+        "Swap Gate Team 🇱🇰\n\n"
+        "🚨 ATTENTION: USDT Buy & Sell services are exclusively for residents of Sri Lanka! 🇱🇰\n\n"
+        "Looking to buy or sell USDT securely and hassle-free? Experience a seamless crypto trading journey with the Swap Gate team!\n\n"
+        "✨ Why Choose Us for USDT?\n"
+        "• 100% Secure & Reliable transactions tailored for Sri Lankan users.\n"
+        "• Fast & Efficient processing for all your buys and sells.\n"
+        "• Local Bank Support for smooth and easy payments.\n"
+        "• Dedicated Customer Service ready to assist you.\n\n"
+        "🌍 Good news for everyone worldwide!\n"
+        "Anyone from any country can freely use our website's \"News Operation\" section to stay updated with the latest news.\n\n"
+        "🔗 Join our WhatsApp Community: https://chat.whatsapp.com/LgCZ5CTuKujEdq9pR2xMMG?mode=ems_copy_t\n\n"
+        "🌐 Visit our website now: http://www.swapgate-store.com\n"
+        "📞 Call / WhatsApp us: +94 71 753 3547\n\n"
+        "Trade with confidence with the Swap Gate team!"
     )
     
     # AI කන්ටෙන්ට් එක සමඟ ප්‍රචාරක කොටස එකතු කිරීම
