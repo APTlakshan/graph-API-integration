@@ -118,22 +118,32 @@ def publish_automated_post():
 
     # ප්‍රචාරක විස්තරය (Promotional Footer) සකස් කිරීම
     promotional_footer = (
-        "\n\n-----------------------------------\n"
-        "Swap Gate Team 🇱🇰\n\n"
-        "🚨 ATTENTION: USDT Buy & Sell services are exclusively for residents of Sri Lanka! 🇱🇰\n\n"
-        "Looking to buy or sell USDT securely and hassle-free? Experience a seamless crypto trading journey with the Swap Gate team!\n\n"
-        "✨ Why Choose Us for USDT?\n"
-        "• 100% Secure & Reliable transactions tailored for Sri Lankan users.\n"
-        "• Fast & Efficient processing for all your buys and sells.\n"
-        "• Local Bank Support for smooth and easy payments.\n"
-        "• Dedicated Customer Service ready to assist you.\n\n"
-        "🌍 Good news for everyone worldwide!\n"
-        "Anyone from any country can freely use our website's \"News Operation\" section to stay updated with the latest news.\n\n"
-        "🔗 Join our WhatsApp Community: https://chat.whatsapp.com/LgCZ5CTuKujEdq9pR2xMMG?mode=ems_copy_t\n\n"
-        "🌐 Visit our website now: http://www.swapgate-store.com\n"
-        "📞 Call / WhatsApp us: +94 71 753 3547\n\n"
-        "Trade with confidence with the Swap Gate team!"
-    )
+    "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    "🚨📊 𝗛𝗢𝗪 𝗪𝗜𝗟𝗟 𝗧𝗛𝗜𝗦 𝗡𝗘𝗪𝗦 𝗜𝗠𝗣𝗔𝗖𝗧 𝗧𝗛𝗘 𝗠𝗔𝗥𝗞𝗘𝗧? 📊🚨\n"
+    "💭 𝗪𝗵𝗮𝘁 𝗱𝗼 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸?\n"
+    "📈 𝗕𝗨𝗟𝗟𝗜𝗦𝗛 𝗼𝗿 📉 𝗕𝗘𝗔𝗥𝗜𝗦𝗛?\n"
+    "👇 𝗗𝗿𝗼𝗽 𝗬𝗼𝘂𝗿 𝗧𝗵𝗼𝘂𝗴𝗵𝘁𝘀 𝗶𝗻 𝘁𝗵𝗲 𝗖𝗼𝗺𝗺𝗲𝗻𝘁𝘀 𝗕𝗲𝗹𝗼𝘄! 👇\n\n"
+    "⚠️ 𝗗𝗶𝘀𝗰𝗹𝗮𝗶𝗺𝗲𝗿:\n"
+    "This post is for informational purposes only and should not be considered financial advice. Always conduct your own research before making investment decisions.\n"
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    "🇱🇰 𝗦𝗪𝗔𝗣 𝗚𝗔𝗧𝗘 𝗧𝗘𝗔𝗠\n"
+    "🚨 𝗨𝗦𝗗𝗧 𝗕𝗨𝗬 & 𝗦𝗘𝗟𝗟 – 𝗦𝗥𝗜 𝗟𝗔𝗡𝗞𝗔 𝗢𝗡𝗟𝗬 🇱🇰\n\n"
+    "🔐 𝗦𝗲𝗰𝘂𝗿𝗲 & 𝗥𝗲𝗹𝗶𝗮𝗯𝗹𝗲\n"
+    "⚡ 𝗙𝗮𝘀𝘁 𝗣𝗿𝗼𝗰𝗲𝘀𝘀𝗶𝗻𝗴\n"
+    "🏦 𝗟𝗼𝗰𝗮𝗹 𝗕𝗮𝗻𝗸 𝗦𝘂𝗽𝗽𝗼𝗿𝘁\n"
+    "💬 𝗗𝗲𝗱𝗶𝗰𝗮𝘁𝗲𝗱 𝗖𝘂𝘀𝘁𝗼𝗺𝗲𝗿 𝗦𝘂𝗽𝗽𝗼𝗿𝘁\n"
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    "🌍 𝗪𝗢𝗥𝗟𝗗𝗪𝗜𝗗𝗘 𝗡𝗘𝗪𝗦 𝗔𝗖𝗖𝗘𝗦𝗦\n\n"
+    "📰 Understand how major global news can impact the 𝗙𝗼𝗿𝗲𝘅 & 𝗖𝗿𝘆𝗽𝘁𝗼 𝗺𝗮𝗿𝗸𝗲𝘁𝘀 — clearly explained in your own language, based on the country you are in.\n\n"
+    "📊 Stay updated with the latest 𝗖𝗿𝘆𝗽𝘁𝗼 & 𝗠𝗮𝗿𝗸𝗲𝘁 𝗡𝗲𝘄𝘀 through our website’s 𝗡𝗲𝘄𝘀 𝗢𝗽𝗲𝗿𝗮𝘁𝗶𝗼𝗻 section.\n\n"
+    "🔗 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽\n"
+    "https://chat.whatsapp.com/LgCZ5CTuKujEdq9pR2xMMG\n\n"
+    "🌐 𝗪𝗲𝗯𝘀𝗶𝘁𝗲\n"
+    "http://www.swapgate-store.com\n\n"
+    "📞 𝗖𝗮𝗹𝗹 / 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽\n"
+    "+94 71 753 3547\n\n"
+    "🚀 𝗦𝘄𝗮𝗽 𝗚𝗮𝘁𝗲 – 𝗧𝗿𝗮𝗱𝗲 𝘄𝗶𝘁𝗵 𝗖𝗼𝗻𝗳𝗶𝗱𝗲𝗻𝗰𝗲!"
+)
     
     # AI කන්ටෙන්ට් එක සමඟ ප්‍රචාරක කොටස එකතු කිරීම
     final_content = content + promotional_footer
