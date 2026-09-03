@@ -115,7 +115,6 @@ def publish_automated_post():
 
     print(f"AI Suggested Search Keyword for Media: '{search_keyword}'")
 
-    # ප්‍රචාරක විස්තරය (Promotional Footer) සකස් කිරීම
     promotional_footer = (
         "\n-------------------------------------\n"
         "🚨📊 HOW WILL THIS NEWS IMPACT THE MARKET? 📊🚨\n"
