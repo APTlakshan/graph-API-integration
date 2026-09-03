@@ -7,7 +7,7 @@ import time
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
-# .env ෆයිල් එකෙන් රහස් දත්ත ලබා ගැනීම
+
 load_dotenv()
 
 PAGE_ID = os.getenv("PAGE_ID")
@@ -16,7 +16,6 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY")
 
-# Supabase Configurations
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
@@ -145,7 +144,7 @@ def publish_automated_post():
         "🚀 Swap Gate - Trade with Confidence!"
     )
     
-    # AI කන්ටෙන්ට් එක සමඟ ප්‍රචාරක කොටස එකතු කිරීම
+    
     final_content = content + promotional_footer
 
     chosen_media = random.choices(["photo", "video"], weights=[0.3, 0.7])[0]
